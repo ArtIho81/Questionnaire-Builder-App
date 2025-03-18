@@ -1,0 +1,15 @@
+.quiz-card {
+    position: relative;
+    width: 300px;
+    border: 2px solid black;
+}
+
+.question-input-block {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.answer-input-block {
+    text-align: center;
+}
