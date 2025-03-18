@@ -1,6 +1,7 @@
 import React from "react";
 
-export const AnswerInput = () => {
+export const AnswerInput = (props) => {
+
   return (
     <div className="answer-input-block">
       <label>
