@@ -1,16 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { removeQuestion } from "../store/slices/createQuizSlice";
 
 export const QuestionInput = (props) => {
-  const value = useSelector(
-    (state) =>
-      state.createQuiz.questions.find((question) => question.id === props.id)
-        .text
-  );
-  const type = useSelector(
-    (state) =>
-      state.createQuiz.questions.find((question) => question.id === props.id)
-        .text
+  const { text, type } = useSelector((state) =>
+    state.createQuiz.questions.find((question) => question.id === props.id)
   );
   const dispatch = useDispatch();
   return (
@@ -18,7 +12,7 @@ export const QuestionInput = (props) => {
       <div className="question-input-block">
         <label>
           Question
-          <input type="text" value={value} />
+          <input type="text" value={text} />
         </label>
         <label>
           Type
@@ -28,7 +22,9 @@ export const QuestionInput = (props) => {
             <option value="multiple-choices">Multiple choice</option>
           </select>
         </label>
-        <button onClick={() => props.onRemove(props.id)}>Remove</button>
+        <button onClick={() => dispatch(removeQuestion({ id: props.id }))}>
+          Remove
+        </button>
       </div>
     </>
   );
