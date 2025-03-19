@@ -1,23 +1,22 @@
 import React from "react";
 import { AnswerInput } from "./AnswerInput";
 import { addAnswer } from "../store/slices/createQuizSlice";
+import { useDispatch } from "react-redux";
 
-export const AnswersList = (props) => {
-  
+export const AnswersList = ({ answers, id, type }) => {
+  const dispatch = useDispatch();
+  const handleClick = () => dispatch(addAnswer({ id }));
+
   return (
     <>
       <ol>
-        {props.answers.map((answer) => (
+        {answers.map((answer) => (
           <li key={answer.id}>
-            <AnswerInput />
+            <AnswerInput questionId={id} {...answer} />
           </li>
         ))}
       </ol>
-      {props.type !== "text" && (
-        <button onClick={() => dispatch(addAnswer({ id: props.id }))}>
-          Add answer
-        </button>
-      )}
+      {type !== "text" && <button onClick={handleClick}>Add answer</button>}
     </>
   );
 };

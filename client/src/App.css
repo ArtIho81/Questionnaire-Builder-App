@@ -1,15 +1,107 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid black;
+}
+
+.info-container,
+.question-input-container {
+  width: 100%;
+  padding: 20px;
+  border: 2px solid brown;
+  margin-bottom: 10px;
+}
+
+.info-item {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.info-item input,
+.info-item textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.info-item textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.info-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .quiz-card {
-    position: relative;
-    width: 300px;
-    border: 2px solid black;
+  position: relative;
+  width: 300px;
+  border: 2px solid black;
 }
 
-.question-input-block {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.question-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.answer-input-block {
-    text-align: center;
+.question-input-item {
+  flex: 3;
+}
+
+.question-input-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#question-type {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.question-input-item textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 70px;
+}
+
+.remove-btn {
+  width: 50%;
+  padding: 10px;
+  background-color: #df0925;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.answer-input-container {
+  text-align: center;
 }

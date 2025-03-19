@@ -14,11 +14,7 @@ const initialQuestionData = {
 const initialState = {
   name: "",
   desc: "",
-  questions: [initialQuestionData],
-};
-
-const findInstanceById = (instances, id) => {
-  return instances.find((instance) => instance.id === id);
+  questions: [],
 };
 
 const createQuizSlice = createSlice({
@@ -35,27 +31,46 @@ const createQuizSlice = createSlice({
     },
 
     setQuestionText: (state, actions) => {
-      findInstanceById(state.questions, actions.payload.id).text =
-        actions.payload.questionText;
+      state.questions.find(
+        (question) => question.id === actions.payload.id
+      ).text = actions.payload.questionText;
     },
 
     setQuestionType: (state, actions) => {
-      findInstanceById(state.questions, actions.payload.id).type =
-        actions.payload.type;
+      state.questions.find(
+        (question) => question.id === actions.payload.id
+      ).type = actions.payload.type;
     },
-
-    addAnswer: (state, actions) => {
-      findInstanceById(state.questions, actions.payload.id).answers.push({
-        id: Date.now(),
-        text: "",
-      });
-    },
-
-    setAnswerText: (state, actions) => {},
 
     removeQuestion: (state, actions) => {
       state.questions = state.questions.filter(
         (question) => question.id !== actions.payload.id
+      );
+    },
+
+    addAnswer: (state, actions) => {
+      state.questions
+        .find((question) => question.id === actions.payload.id)
+        .answers.push({
+          id: Date.now(),
+          text: "",
+        });
+    },
+
+    setAnswerText: (state, actions) => {
+      const question = state.questions.find(
+        (question) => question.id === actions.payload.id
+      );
+      question.answers.find((answer) => answer.id === actions.payload.id).text =
+        actions.payload.answertext;
+    },
+
+    removeAnswer: (state, actions) => {
+      const question = state.questions.find(
+        (question) => question.id === actions.payload.questionId
+      );
+      question.answers = question.answers.filter(
+        (answer) => answer.id !== actions.payload.id
       );
     },
   },
@@ -68,6 +83,8 @@ export const {
   removeQuestion,
   setQuestionText,
   setQuestionType,
+  setAnswerText,
+  removeAnswer,
 } = createQuizSlice.actions;
 
 export default createQuizSlice.reducer;

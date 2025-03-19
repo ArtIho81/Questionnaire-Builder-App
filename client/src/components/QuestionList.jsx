@@ -5,20 +5,21 @@ import { AnswersList } from "./AnswersList";
 import { addQuestion } from "../store/slices/createQuizSlice";
 
 export const QuestionList = () => {
-  const questions = useSelector((state) => state.createQuiz.questions);
+  const { name, questions } = useSelector((state) => state.createQuiz);
   const dispatch = useDispatch();
+  const handleClick = () => dispatch(addQuestion());
 
   return (
     <>
       <ol>
         {questions.map((question) => (
           <li key={question.id}>
-            <QuestionInput {...question} />
-            <AnswersList {...question} />
+              <QuestionInput {...question} />
+              <AnswersList {...question} />
           </li>
         ))}
       </ol>
-      <button onClick={() => dispatch(addQuestion())}>Add question</button>
+      {name && <button onClick={handleClick}>Add question</button>}
     </>
   );
 };

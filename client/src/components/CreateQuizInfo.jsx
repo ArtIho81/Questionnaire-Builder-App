@@ -8,25 +8,23 @@ export const CreateQuizInfo = () => {
   const desc = useInput("");
   const [click, setClick] = useState(false);
   const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(createNewQuiz({ name: name.value, desc: desc.value }));
+    name.value && setClick(true);
+  };
 
   return (
-    <div>
-      <label>
-        Quiz name
-        <input type="text" {...name} />
-      </label>
-      <label>
-        Quiz desription
-        <textarea name="" id="" {...desc}></textarea>
-      </label>
-
-      <button
-        onClick={() => {
-          dispatch(createNewQuiz({ name: name.value, desc: desc.value }));
-          setClick(true);
-        }}
-      >
-        {click && name.value ? "Edit quiz info" : "Create new quiz"}
+    <div className="info-container">
+      <div className="info-item">
+        <label htmlFor="name">Quiz name</label>
+        <input type="text" id="name" {...name} />
+      </div>
+      <div className="info-item">
+        <label htmlFor="desc">Quiz desription</label>
+        <textarea id="desc" {...desc}></textarea>
+      </div>
+      <button onClick={handleClick}>
+        {click ? "Edit quiz info" : "Create new quiz"}
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   removeQuestion,
   setQuestionText,
@@ -15,18 +15,15 @@ export const QuestionInput = ({ id, text, type }) => {
   const handleClick = () => dispatch(removeQuestion({ id }));
 
   return (
-    <>
-      <div className="question-input-block">
-        <label>
-          Question
-          <input type="text" value={text} onChange={handleChange} />
-        </label>
-        <label>
-          Type
-          <QuestionTypeSelect type={type} id={id} />
-        </label>
-        <button onClick={handleClick}>Remove</button>
+    <div className="question-input-container">
+      <div className="question-input-item">
+        <label htmlFor="question">Question</label>
+        <textarea id="question" value={text} onChange={handleChange} />
       </div>
-    </>
+      <div className="question-input-actions">
+        <QuestionTypeSelect type={type} id={id} />
+        <button className="remove-btn" onClick={handleClick}>Remove</button>
+      </div>
+    </div>
   );
 };
