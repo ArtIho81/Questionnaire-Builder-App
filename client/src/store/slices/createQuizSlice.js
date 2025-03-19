@@ -21,25 +21,18 @@ const createQuizSlice = createSlice({
   name: "createQuiz",
   initialState,
   reducers: {
-    createNewQuiz: (state, actions) => {
-      state.name = actions.payload.name;
-      state.desc = actions.payload.desc;
+    setQuizInfo: (state, actions) => {
+      const { value, input } = actions.payload;
+      state[input] = value;
     },
 
     addQuestion: (state) => {
       state.questions.push({ ...initialQuestionData, id: Date.now() });
     },
 
-    setQuestionText: (state, actions) => {
-      state.questions.find(
-        (question) => question.id === actions.payload.id
-      ).text = actions.payload.questionText;
-    },
-
-    setQuestionType: (state, actions) => {
-      state.questions.find(
-        (question) => question.id === actions.payload.id
-      ).type = actions.payload.type;
+    setQuestionData: (state, actions) => {
+      const { id, value, input } = actions.payload;
+      state.questions.find((question) => question.id === id)[input] = value;
     },
 
     removeQuestion: (state, actions) => {
@@ -59,7 +52,7 @@ const createQuizSlice = createSlice({
 
     setAnswerText: (state, actions) => {
       const question = state.questions.find(
-        (question) => question.id === actions.payload.id
+        (question) => question.id === actions.payload.questionId
       );
       question.answers.find((answer) => answer.id === actions.payload.id).text =
         actions.payload.answertext;
@@ -77,12 +70,11 @@ const createQuizSlice = createSlice({
 });
 
 export const {
-  createNewQuiz,
+  setQuizInfo,
   addAnswer,
   addQuestion,
   removeQuestion,
-  setQuestionText,
-  setQuestionType,
+  setQuestionData,
   setAnswerText,
   removeAnswer,
 } = createQuizSlice.actions;

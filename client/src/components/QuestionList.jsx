@@ -5,7 +5,7 @@ import { AnswersList } from "./AnswersList";
 import { addQuestion } from "../store/slices/createQuizSlice";
 
 export const QuestionList = () => {
-  const { name, questions } = useSelector((state) => state.createQuiz);
+  const questions = useSelector((state) => state.createQuiz.questions);
   const dispatch = useDispatch();
   const handleClick = () => dispatch(addQuestion());
 
@@ -14,12 +14,14 @@ export const QuestionList = () => {
       <ol>
         {questions.map((question) => (
           <li key={question.id}>
+            <div className="question-data-container">
               <QuestionInput {...question} />
               <AnswersList {...question} />
+            </div>
           </li>
         ))}
       </ol>
-      {name && <button onClick={handleClick}>Add question</button>}
+      <button onClick={handleClick}>Add question</button>
     </>
   );
 };

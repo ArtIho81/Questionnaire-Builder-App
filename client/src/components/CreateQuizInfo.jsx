@@ -1,31 +1,38 @@
 import React, { useState } from "react";
-import { createNewQuiz } from "../store/slices/createQuizSlice";
-import { useDispatch } from "react-redux";
+import { addQuestion, setQuizInfo } from "../store/slices/createQuizSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useInput } from "../hooks/useInput.js";
+import { LabeledTextArea } from "./LabeledTextArea.jsx";
 
 export const CreateQuizInfo = () => {
-  const name = useInput("");
-  const desc = useInput("");
-  const [click, setClick] = useState(false);
+  const { name, desc } = useSelector((state) => state.createQuiz);
   const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(createNewQuiz({ name: name.value, desc: desc.value }));
-    name.value && setClick(true);
-  };
+
+  const handleChange = (e) =>
+    dispatch(
+      setQuizInfo({ value: e.target.value, input: e.target.dataset.input })
+    );
 
   return (
     <div className="info-container">
       <div className="info-item">
         <label htmlFor="name">Quiz name</label>
-        <input type="text" id="name" {...name} />
+        <input
+          data-input="name"
+          type="text"
+          id="name"
+          value={name}
+          onChange={handleChange}
+        />
       </div>
-      <div className="info-item">
-        <label htmlFor="desc">Quiz desription</label>
-        <textarea id="desc" {...desc}></textarea>
-      </div>
-      <button onClick={handleClick}>
-        {click ? "Edit quiz info" : "Create new quiz"}
-      </button>
+      <LabeledTextArea
+        dataInput="desc"
+        label="Quiz desription"
+        className="info-item"
+        id="desc"
+        value={desc}
+        onChange={handleChange}
+      />
     </div>
   );
 };

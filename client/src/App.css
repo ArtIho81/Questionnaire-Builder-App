@@ -6,7 +6,7 @@
 }
 
 .info-container,
-.question-input-container {
+.question-data-container {
   width: 100%;
   padding: 20px;
   border: 2px solid brown;
@@ -72,7 +72,7 @@ label {
   align-items: center;
 }
 
-#question-type {
+select {
   display: block;
   width: 100%;
   padding: 10px;
